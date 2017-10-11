@@ -1,0 +1,20 @@
+text.
+    NodeType:
+        <span class="red">anyAttribute</span>: any
+        (<span class="green">NodeTypeName</span>|<span class="red">name</span>): String|QName
+        <span class="orange">derived_from</span>: QName(NodeType)
+        <span class="green">version</span>: Version
+        (<span class="green">metadata</span>|<span class="red">Tags</span>): (Metadata|Tag*)
+            (<span class="orange">targetNamespace</span>): Namespace
+            <span class="red">abstract:</span> Boolean
+            <span class="red">final:</span> Boolean
+        <span class="orange">description</span>: (Description|Documentation)
+        <span class="green">attributes</span>: AttributeDefinition*
+        <span class="orange">properties</span>: (PropertyDefinition*|QName)
+        <span class="orange">requirements</span>: RequirementDefinition*
+        <span class="orange">capabilities</span>: CapabilityDefinition*
+        <span class="orange">interfaces</span>: (InterfaceDefinitions*|Interface*)
+        (<span class="green">artifacts</span>|<span class="red">ImplementationArtifacts</span>
+            |<span class="red">DeploymentArtifacts</span>): (ArtifactDefinition*
+                |ImplementationArtifact*|DeploymentArtifact*)
+        <span class="red">InstanceStates</span>: InstanceState*

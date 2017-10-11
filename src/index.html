@@ -1,0 +1,107 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>TOSCA Converter</title><link rel="stylesheet" href="css/reveal.css"><link rel="stylesheet" href="css/theme/black.css"><!-- Theme used for syntax highlighting of code--><link rel="stylesheet" href="lib/css/zenburn.css"><!-- Printing and PDF exports--><script>var link = document.createElement('link');
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+document.getElementsByTagName('head')[0].appendChild(link);</script></head><body><div class="reveal"><div class="slides"><section><h1>TOSCA YAML/XML Converter</h1></section><section id="TOC" data-markdown>## Table of Contents
+1. TOSCA type definitions
+    1. [Node type]
+    1. [Relationship type]
+    1. [Artifact type]
+1. TOSCA simple profile definitions
+    1. [Node template]
+1. TOSCA YAML specific elements
+    1. [Version]  
+  
+[Node type]: #/NodeType
+[Relationship type]: #/RelationshipType
+[Artifact type]: #/ArtifactType
+
+[Node template]: #/NodeTemplate
+
+[Version]: #/Version</section><section><section id="NodeType" data-markdown>## Node Type
+- [TOSCA YAML Node type]
+- [TOSCA XML Node type]
+- [TOSCA XML Node type implementation]
+- [Combined Node type]
+
+[TOSCA YAML Node type]: #/YamlNodeType
+[TOSCA XML Node type]: #/XmlNodeType
+[TOSCA XML Node type implementation]: #/XmlNodeTypeImplementation
+[Combined Node type]: #/CombinedNodeType</section><section id="YamlNodeType"><h2>TOSCA YAML Node type</h2><pre><code data-noescape><script>var id="#/NodeType";</script><text>NodeTypeName:<text><bold>
+    derived_from: QName(<a href="#" onclick="location.href=this.href+'?key='+id;return false;">EntityType</a>)
+    version: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">Version</a>
+    metadata: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">Metadata</a>
+        targetNamespace: Namespace
+    description: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">Description</a>
+    attributes: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">AttributeDefinition</a>*
+    properties: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">PropertyDefinition</a>*</text></text><text><bold>
+    requirements: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">RequirementDefinition</a>*
+    capabilities: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">CapabilityDefinition</a>*
+    interfaces: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">InterfaceDefinitions</a>*
+    artifacts: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">ArtifactDefinition</a>*</text></code></pre></section><section id="XmlNodeType"><h2>TOSCA XML Node type</h2><pre><code data-noescape><text>NodeType:
+    documentation: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">Documentation</a>
+    anyAttribute: any
+    name: QName
+    targetNamespace: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">Namespace</a>
+    abstract: Boolean
+    final: Boolean
+    Tags: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">Tag</a>*
+    DerivedFrom: QName(<a href="#" onclick="location.href=this.href+'?key='+id;return false;">NodeType</a>)
+    PropertiesDefinition: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">PropertiesDefinition</a>
+    RequirementDefinitions: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">RequirementDefinition</a>*
+    CapabilityDefinitions: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">CapabilityDefinition</a>*
+    InstanceStates: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">InstanceState</a>*
+    Interfaces: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">Interface</a>*</text></code></pre></section><section id="XmlNodeTypeImplementation"><h2>TOSCA XML Node type implementation</h2><pre><code data-noescape><text>NodeTypeImplementation:
+    name: QName
+    targetNamespace: Namespace
+    nodeType: QName(NodeType)
+    abstract: Boolean
+    final: Boolean
+    Tags: Tag*
+    Derived_from: QName(NodeTypeImplementation)?
+    RequiredContainerFeatures: RequiredContainerFeature*
+    ImplementationArtifacts: ImplementationArtifact*
+    DeploymentArtifacts: DeploymentArtifact*</text></code></pre></section><section id="CombinedNodeType"><h2>Combined Node type</h2><pre><code data-noescape><text>NodeType:
+    <span class="red">anyAttribute</span>: any
+    (<span class="green">NodeTypeName</span>|<span class="red">name</span>): String|QName
+    <span class="orange">derived_from</span>: QName(NodeType)
+    <span class="green">version</span>: Version
+    (<span class="green">metadata</span>|<span class="red">Tags</span>): (Metadata|Tag*)
+        (<span class="orange">targetNamespace</span>): Namespace
+        <span class="red">abstract:</span> Boolean
+        <span class="red">final:</span> Boolean
+    <span class="orange">description</span>: (Description|Documentation)
+    <span class="green">attributes</span>: AttributeDefinition*
+    <span class="orange">properties</span>: (PropertyDefinition*|QName)
+    <span class="orange">requirements</span>: RequirementDefinition*
+    <span class="orange">capabilities</span>: CapabilityDefinition*
+    <span class="orange">interfaces</span>: (InterfaceDefinitions*|Interface*)
+    (<span class="green">artifacts</span>|<span class="red">ImplementationArtifacts</span>
+        |<span class="red">DeploymentArtifacts</span>): (ArtifactDefinition*
+            |ImplementationArtifact*|DeploymentArtifact*)
+    <span class="red">InstanceStates</span>: InstanceState*</text></code></pre></section></section><section><h1>Other TOSCA YAML elements</h1></section><section><h2>TOSCA Version</h2><table><tr><td>Shorthand Name</td><td>version</td></tr><tr><td>Type Qualified Name</td><td>tosca:version</td></tr></table><p style="text-align: left;">To support the reuse of type definitions TOSCA YAML supports versions.
+</p><p style="text-align: left;">Grammar</p><pre><code data-noescape>major_version.minor_version
+    [.fix_version[.qualifier[-build_version]]]</code></pre></section></div></div><script src="lib/js/head.min.js"></script><script src="js/reveal.js"></script><script>Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    markdown: {
+        gfm: true,
+        tables: true,
+        breaks: false,
+        pedantic: false,
+        sanitize: false,
+        smartLists: true,
+        smartypants: false
+    },
+    dependencies: [
+        {src: 'plugin/markdown/marked.js'},
+        {src: 'plugin/markdown/markdown.js'},
+        {src: 'plugin/notes/notes.js', async: true},
+        {
+            src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+            hljs.initHighlightingOnLoad();
+        }
+        }
+    ]
+});</script></body></html>

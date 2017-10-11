@@ -1,20 +1,4 @@
 section
     h1 Other TOSCA YAML elements
 
-section
-    h2 TOSCA Version
-    table(class=namings)
-        tr
-            td Shorthand Name
-            td version
-        tr
-            td Type Qualified Name
-            td tosca:version
-    p(style="text-align: left;").
-        To support the reuse of type definitions TOSCA YAML supports versions.
-
-    p(style="text-align: left;") Grammar
-    pre
-        code(data-noescape).
-            major_version.minor_version
-                [.fix_version[.qualifier[-build_version]]]
+include version/version.pug

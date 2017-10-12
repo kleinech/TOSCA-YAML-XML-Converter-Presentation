@@ -1,9 +1,14 @@
 script.
     var id="#/NodeType";
-text NodeTypeName:
-    include entityTypePart
 text.
-    <bold>
+    NodeTypeName:
+        derived_from: QName(<a href="#/Version;">NodeType</a>)
+        version: <a href="#/Version">Version</a>
+        metadata: <a href="#/Metadata">Metadata</a>
+        targetNamespace: <a href="#/Namespace">Namespace</a>
+        description: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">Description</a>
+        attributes: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">AttributeDefinition</a>*
+        properties: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">PropertyDefinition</a>*
         requirements: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">RequirementDefinition</a>*
         capabilities: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">CapabilityDefinition</a>*
         interfaces: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">InterfaceDefinitions</a>*

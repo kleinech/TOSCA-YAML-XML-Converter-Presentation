@@ -70,6 +70,15 @@ body {
 .reveal h4 {
   font-size: 1em; }
 
+.reveal h5 {
+  font-size: 0.77em; }
+
+.reveal h6 {
+  font-size: 0.57em; }
+
+.reveal h7 {
+  font-size: 0.47em; }
+
 .reveal h1 {
   text-shadow: none; }
 

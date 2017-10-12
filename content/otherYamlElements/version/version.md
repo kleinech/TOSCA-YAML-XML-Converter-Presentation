@@ -1,4 +1,4 @@
-## TOSCA Version
+### TOSCA Version
 
 | Shorthand Name      | version       |
 |---------------------|---------------|

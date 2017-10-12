@@ -18,7 +18,10 @@ document.getElementsByTagName('head')[0].appendChild(link);</script></head><a hr
 
 [Node template]: #/NodeTemplate
 
-[Version]: #/Version</section><section><section id="NodeType" data-markdown>## Node Type
+[Version]: #/Version</section><section id="TypeDefinitions" data-markdown>## TOSCA Type Definitions
+- [Node type]
+
+[Node type]: #/NodeType</section><section><section id="NodeType" data-markdown>## Node Type
 - [TOSCA YAML Node type]
 - [TOSCA XML Node type]
 - [TOSCA XML Node type implementation]
@@ -27,14 +30,14 @@ document.getElementsByTagName('head')[0].appendChild(link);</script></head><a hr
 [TOSCA YAML Node type]: #/YamlNodeType
 [TOSCA XML Node type]: #/XmlNodeType
 [TOSCA XML Node type implementation]: #/XmlNodeTypeImplementation
-[Combined Node type]: #/CombinedNodeType</section><section id="YamlNodeType"><h2>TOSCA YAML Node type</h2><pre><code data-noescape><script>var id="#/NodeType";</script><text>NodeTypeName:<text><bold>
-    derived_from: QName(<a href="#" onclick="location.href=this.href+'?key='+id;return false;">EntityType</a>)
+[Combined Node type]: #/CombinedNodeType</section><section id="YamlNodeType"><h2>TOSCA YAML Node type</h2><pre><code data-noescape><script>var id="#/NodeType";</script><text>NodeTypeName:
+    derived_from: QName(<a href="#/Version;">NodeType</a>)
     version: <a href="#/Version">Version</a>
-    metadata: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">Metadata</a>
-        targetNamespace: Namespace
+    metadata: <a href="#/Metadata">Metadata</a>
+    targetNamespace: <a href="#/Namespace">Namespace</a>
     description: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">Description</a>
     attributes: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">AttributeDefinition</a>*
-    properties: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">PropertyDefinition</a>*</text></text><text><bold>
+    properties: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">PropertyDefinition</a>*
     requirements: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">RequirementDefinition</a>*
     capabilities: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">CapabilityDefinition</a>*
     interfaces: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">InterfaceDefinitions</a>*
@@ -79,7 +82,51 @@ document.getElementsByTagName('head')[0].appendChild(link);</script></head><a hr
     (<span class="green">artifacts</span>|<span class="red">ImplementationArtifacts</span>
         |<span class="red">DeploymentArtifacts</span>): (ArtifactDefinition*
             |ImplementationArtifact*|DeploymentArtifact*)
-    <span class="red">InstanceStates</span>: InstanceState*</text></code></pre></section></section><section><h1>Other TOSCA YAML elements</h1></section><section id="Version" data-markdown>## TOSCA Version
+    <span class="red">InstanceStates</span>: InstanceState*</text></code></pre></section></section><section id="OtherElements" data-markdown>## Other TOSCA Elements
+- [Metadata and Tags]
+- [Namespace]
+
+[Metadata and Tags]: #/MetadataAndTags
+[Namespace]: #/Namespace</section><section><section id="MetadataAndTags" data-markdown>### Metadata and Tags</section><section id="Metadata"><h4>Metadata</h4><pre><code data-noescape><text>metadata:
+    (key: value)*
+
+key: string
+value: string
+
+</text></code></pre><h5>Optional key names</h5><pre><code data-noescape><text>metadata:
+    template_name: string
+    template_author: string
+    template_version: <a href="#/Version">Version</a>
+</text></code></pre><h5>Converter specific key names</h5><pre><code data-noescape><text>targetNamespace: <a href="#/Namespace">Namespace</a></text></code></pre></section><section id="Tags"><h4>Tags</h4><pre><code><text>Tags: Tag*
+
+Tag:
+    name: string
+    value: string</text></code></pre></section></section><section><section id="Namespace" data-markdown>### Namespaces
+
+TOSCA XML Namespaces
+```yaml
+TOSCA: http://docs.oasis-open.org/tosca/ns/2011/12
+http://www.opentosca.org/winery/extensions/tosca/2013/02/12
+```
+TOSCA YAML Namespaces
+```yaml
+TOSCA YAML: http://docs.oasis-open.org/tosca/ns/simple/yaml/1.1
+Default: http://www.eclipse.org/winery/ns/simple/yaml/1.1/default
+```
+
+User defined Namespaces
+```yaml
+http://www.kleinech.uni-stuttgart.de/tosca/ns/
+```</section><section id="XMLNamespace" data-markdown>#### OpenTOSCA Namespace conventions
+
+Namespace prefix
+```yaml
+http://www.opentosca.org/
+```
+followed by TOSCA component type
+```yaml
+e.g. servicetemplates, nodetypes, ...
+```</section></section><section id="OtherYamlElements" data-markdown>## Other TOSCA YAML elements</section><section id="Version" data-markdown>### TOSCA Version
 
 | Shorthand Name      | version       |
 |---------------------|---------------|
@@ -91,7 +138,8 @@ document.getElementsByTagName('head')[0].appendChild(link);</script></head><a hr
 major_version.minor_version
                 [.fix_version[.qualifier[-build_version]]]
 ```
-            </section></div></div><script src="lib/js/head.min.js"></script><script src="js/reveal.js"></script><script>Reveal.initialize({
+            </section><section><section id="OtherXmlElements" data-markdown>## Other TOSCA XML Elements
+</section></section></div></div><script src="lib/js/head.min.js"></script><script src="js/reveal.js"></script><script>Reveal.initialize({
     controls: true,
     progress: true,
     history: true,

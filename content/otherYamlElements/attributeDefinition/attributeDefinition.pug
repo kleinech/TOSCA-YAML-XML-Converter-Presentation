@@ -1,0 +1,20 @@
+h4 Attribute definition
+
+ul
+    li.
+        Defines a named and typed value and is used to expose the actual state
+        of some property of a TOSCA entity.
+
+    li.
+        TOSCA orchestrators automatically create Attribute definitions for every Property Definition
+br
+br
+h5 Grammar
+pre
+    code(data-noescape)
+        text.
+            AttributeDefinitionName:
+                type: <a href="#/DataType">DataType</a>
+                description: <a href="#/Description">Description</a>
+                default: <a href="#/AttributeDefault">AttributeDefault</a>
+                status: <a href="#/StatusValue">StatusValue</a>

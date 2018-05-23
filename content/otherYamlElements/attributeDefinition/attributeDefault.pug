@@ -1,0 +1,12 @@
+h4 Attribute default
+
+text.
+    <b><i>MUST</i></b> be derived or calculated from other Attributes or Operation output values<br><br>
+
+h5 Example
+pre
+    code(data-noescape)
+        text.
+            AttributeName:
+                type: string
+                default: { get_operation_output: [ SELF, iface, op, name ] }

@@ -35,8 +35,8 @@ document.getElementsByTagName('head')[0].appendChild(link);</script></head><a hr
     version: <a href="#/Version">Version</a>
     metadata: <a href="#/Metadata">Metadata</a>
     targetNamespace: <a href="#/Namespace">Namespace</a>
-    description: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">Description</a>
-    attributes: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">AttributeDefinition</a>*
+    description: <a href="#/Description">Description</a>
+    attributes: <a href="#/AttributeDefinition">AttributeDefinition</a>*
     properties: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">PropertyDefinition</a>*
     requirements: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">RequirementDefinition</a>*
     capabilities: <a href="#" onclick="location.href=this.href+'?key='+id;return false;">CapabilityDefinition</a>*
@@ -82,7 +82,7 @@ document.getElementsByTagName('head')[0].appendChild(link);</script></head><a hr
     (<span class="green">artifacts</span>|<span class="red">ImplementationArtifacts</span>
         |<span class="red">DeploymentArtifacts</span>): (ArtifactDefinition*
             |ImplementationArtifact*|DeploymentArtifact*)
-    <span class="red">InstanceStates</span>: InstanceState*</text></code></pre></section></section><section id="OtherElements" data-markdown>## Other TOSCA Elements
+    <span class="red">InstanceStates</span>: InstanceState*</text></code></pre></section></section><section id="ArtifactType"><h2>Artifact Type</h2></section><section id="SupportedArtifactTypes"><h3>Supported Artifact Types</h3></section><section id="OtherElements" data-markdown>## Other TOSCA Elements
 - [Metadata and Tags]
 - [Namespace]
 
@@ -97,11 +97,11 @@ value: string
     template_name: string
     template_author: string
     template_version: <a href="#/Version">Version</a>
-</text></code></pre><h5>Converter specific key names</h5><pre><code data-noescape><text>targetNamespace: <a href="#/Namespace">Namespace</a></text></code></pre></section><section id="Tags"><h4>Tags</h4><pre><code><text>Tags: Tag*
+</text></code></pre><h5>Converter specific key names</h5><pre><code data-noescape><text>targetNamespace: <a href="#/Namespace">Namespace</a></text></code></pre></section><section id="Tags"><h4>Tags</h4><pre><code>Tags: Tag*
 
 Tag:
     name: string
-    value: string</text></code></pre></section></section><section><section id="Namespace" data-markdown>### Namespaces
+    value: string</code></pre></section></section><section><section id="Namespace" data-markdown>### Namespaces
 
 TOSCA XML Namespaces
 ```yaml
@@ -126,7 +126,23 @@ http://www.opentosca.org/
 followed by TOSCA component type
 ```yaml
 e.g. servicetemplates, nodetypes, ...
-```</section></section><section id="OtherYamlElements" data-markdown>## Other TOSCA YAML elements</section><section id="Version" data-markdown>### TOSCA Version
+```</section></section><section><section id="DescriptionAndDocumentation" data-markdown>### Description and Documentation
+</section><section id="Description"><section data-markdown>#### Description
+
+Single line descriptions
+```yaml
+description: string
+```
+
+Multi line descriptions
+```yaml
+description: >
+    this is the first line of the description
+    this is appended to the first line of the description
+    
+    this is the second line of the description
+```
+See [YAML multi line strings](https://stackoverflow.com/a/21699210/8235252) for more different ways to write multi line descriptions.</section></section><section id="Documentation"><section data-markdown>#### Documentation</section></section></section><section id="CSAR"><h3>CSAR</h3></section><section id="OtherYamlElements" data-markdown>## Other TOSCA YAML elements</section><section id="Version" data-markdown>### TOSCA Version
 
 | Shorthand Name      | version       |
 |---------------------|---------------|
@@ -138,8 +154,18 @@ e.g. servicetemplates, nodetypes, ...
 major_version.minor_version
                 [.fix_version[.qualifier[-build_version]]]
 ```
-            </section><section><section id="OtherXmlElements" data-markdown>## Other TOSCA XML Elements
-</section></section></div></div><script src="lib/js/head.min.js"></script><script src="js/reveal.js"></script><script>Reveal.initialize({
+            </section><section><section id="AttributeDefinition"><h4>Attribute definition</h4><ul><li>Defines a named and typed value and is used to expose the actual state
+of some property of a TOSCA entity.
+</li><li>TOSCA orchestrators automatically create Attribute definitions for every Property Definition</li></ul><br><br><h5>Grammar</h5><pre><code data-noescape><text>AttributeDefinitionName:
+    type: <a href="#/DataType">DataType</a>
+    description: <a href="#/Description">Description</a>
+    default: <a href="#/AttributeDefault">AttributeDefault</a>
+    status: <a href="#/StatusValue">StatusValue</a></text></code></pre></section><section id="AttributeDefault"><h4>Attribute default</h4><text><b><i>MUST</i></b> be derived or calculated from other Attributes or Operation output values<br><br>
+</text><h5>Example</h5><pre><code data-noescape><text>AttributeName:
+    type: string
+    default: { get_operation_output: [ SELF, iface, op, name ] }</text></code></pre></section></section><section id="TOSCAFunction"><h3>TOSCA functions</h3></section><section id="Errors"><h3>Errors</h3><ul><li>section 2.10</li><li>section 5.4</li><li>section 5.7</li></ul></section><section><section id="OtherXmlElements" data-markdown>## Other TOSCA XML Elements
+</section></section><section id="TOSCAOrchestrator"><h3>TOSCA Orchestrator</h3><ul><li>Conforming as a <a href="#/TOSCAProcessor">TOSCA Processor</a></li><li>Can process all <a href="#/SupportedArtifactTypes">Artifacts types</a></li><li>Can process <a href="#/CSAR">CSARs</a></li><li>Can process <a href="#/TOSCAFunction">TOSCA functions</a></li><li>Can process <a href="#/NormativeTypeDefinition">TOSCA normative type definitions</a></li><li>Generates <a href="Error">specific errors</a></li></ul></section><section id="TOSCAProcessor"><h3>TOSCA Processor</h3></section><section id="NormativeTypeDefinition"><h3>TOSCA Normative type definitions</h3></section><section id="Property"></section><section id="PropertyAssignment"><h4>Property assignment</h4><p>Used to assign values to named properties.</p><h5>Grammar</h5><pre><code data-noescape><text>propertyName: Name | <a href="#/Function">ValueExpression</a>
+</text></code></pre><h5>Example</h5></section></div></div><script src="lib/js/head.min.js"></script><script src="js/reveal.js"></script><script>Reveal.initialize({
     controls: true,
     progress: true,
     history: true,
